@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { YOUTUBE_API } from "../utils/constants";
+import data from "./../utils/data.json";
+import VedioCard from "./VedioCard";
 
 function VedioContainer() {
+  const [vedio, setVedio] = useState([]);
   useEffect(() => {
-    getVedio();
+    setVedio(data.items);
   }, []);
-  const getVedio = async () => {
-    const data = await fetch(YOUTUBE_API);
 
-    const res = await data.json();
+  console.log("res", data.items);
+  console.log("vedio", vedio);
 
-    console.log("res",res)
-  };
-  return <div>vedioContainer</div>;
+  return (
+    <div className="flex  flex-wrap  pt-4">
+      {vedio.map((vedios, index) => (
+        <VedioCard info={vedios} />
+      ))}
+    </div>
+  );
 }
 
 export default VedioContainer;

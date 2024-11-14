@@ -24,7 +24,7 @@ const handleClick=()=>{
       </div>
       <div>
         <input className="border-2 border-gray-400 col-span-10 w-1/2  rounded-l-full" ></input>
-        <button className=" border-gray-400 border-2 rounded-r-full w-1/12 "> Search</button>
+        <button className=" border-gray-400 border-2 ml-0 rounded-r-full w-1/6 ">Search</button>
       </div>
       <div className=" grid justify-items-end">
         <img
