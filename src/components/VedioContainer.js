@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { YOUTUBE_API } from "../utils/constants";
 
 function VedioContainer() {
-  return (
-    <div>
-      vedioContainer
-    </div>
-  )
+  useEffect(() => {
+    getVedio();
+  }, []);
+  const getVedio = async () => {
+    const data = await fetch(YOUTUBE_API);
+
+    const res = await data.json();
+
+    console.log("res",res)
+  };
+  return <div>vedioContainer</div>;
 }
 
-export default VedioContainer
+export default VedioContainer;
