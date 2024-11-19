@@ -13,7 +13,7 @@ function VedioContainer() {
   console.log("vedio", vedio);
 
   return (
-    <div className="flex  flex-wrap  pt-4">
+    <div className="flex cursor-pointer flex-wrap  pt-4">
       {vedio.map((vedios, index) => (
         <VedioCard info={vedios} />
       ))}
