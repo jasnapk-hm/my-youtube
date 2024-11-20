@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_API } from "../utils/constants";
 import data from "./../utils/data.json";
 import VedioCard from "./VedioCard";
+import { Link } from "react-router-dom";
 
 function VedioContainer() {
   const [vedio, setVedio] = useState([]);
@@ -15,7 +16,7 @@ function VedioContainer() {
   return (
     <div className="flex cursor-pointer flex-wrap  pt-4">
       {vedio.map((vedios, index) => (
-        <VedioCard info={vedios} />
+       <Link to={"/watch?v=" + vedios?.id}> {console.log("id clicked",vedios.id)}<VedioCard info={vedios} /></Link> 
       ))}
     </div>
   );

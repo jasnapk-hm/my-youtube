@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
 
@@ -8,7 +9,7 @@ function Sidebar() {
     <div className="bg-white shadow-2xl p-8 w-48">
  
       <ul>
-        <li>Home</li>
+        <li ><Link className="hover:font-bold" to="/">Home</Link></li>
         <li>Shorts</li>
         <li>vedios</li>
       </ul>
