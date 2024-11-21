@@ -5,12 +5,14 @@ import { SEARCH_API } from "../utils/constants";
 
 function Head() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestion,setShowSuggestions] =useState(false)
 
   const dispatch = useDispatch();
   useEffect(() => {
     const timer = setTimeout(() => {
       getSearchQuery();
-    }, 200);
+    }, 800);
     return () => {
       clearTimeout(timer);
     };
@@ -19,7 +21,8 @@ function Head() {
   const getSearchQuery = async () => {
     const res = await fetch(SEARCH_API + searchQuery);
     const data = await res.json();
-    console.log(data);
+    console.log("api response", data[1]);
+    setSuggestions(data[1]);
   };
 
   const handleClick = () => {
@@ -45,11 +48,26 @@ function Head() {
           className="border-2 border-gray-400 pl-4 col-span-10 w-1/2  rounded-l-full"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={()=>setShowSuggestions(true)}
+          onBlur={()=>setShowSuggestions(false)}
         ></input>
-        <button className=" border-gray-400 border-2 ml-0   hover:bg-slate-300  rounded-r-full w-1/6 ">
-          Search
+        <button className=" border-gray-400 border-2 ml-0   hover:bg-slate-300  rounded-r-full w-1/12 ">
+          🔍
         </button>
+        <div className="fixed py-2 px-5 absolute bg-slate-100 shadow-lg rounded-lg w-[24rem]">
+          <ul>
+            {showSuggestion && suggestions?.map((s) => (
+              <li
+                key={s}
+                className="py-2 shadow-sm hover:bg-gray-200  rounded-lg "
+              >
+                🔍 {s}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+
       <div className=" grid justify-items-end">
         <img
           src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTY1LWtsaGN3ZWNtLmpwZw.jpg"

@@ -10,13 +10,13 @@ function VedioContainer() {
     setVedio(data.items);
   }, []);
 
-  console.log("res", data.items);
-  console.log("vedio", vedio);
-
   return (
     <div className="flex cursor-pointer flex-wrap  pt-4">
       {vedio.map((vedios, index) => (
-       <Link to={"/watch?v=" + vedios?.id}> {console.log("id clicked",vedios.id)}<VedioCard info={vedios} /></Link> 
+        <Link to={"/watch?v=" + vedios?.id}>
+          {" "}
+          <VedioCard info={vedios} />
+        </Link>
       ))}
     </div>
   );
