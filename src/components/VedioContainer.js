@@ -15,7 +15,7 @@ function VedioContainer() {
       {vedio.map((vedios, index) => (
         <Link to={"/watch?v=" + vedios?.id}>
           {" "}
-          <VedioCard info={vedios} />
+          <VedioCard key={vedios.id} info={vedios} />
         </Link>
       ))}
     </div>
