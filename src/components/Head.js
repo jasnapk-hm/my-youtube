@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/Slice";
 import { SEARCH_API } from "../utils/constants";
+import { cacheSearch } from "../utils/searchSlice";
 
 function Head() {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestion,setShowSuggestions] =useState(false)
+  const [showSuggestion, setShowSuggestions] = useState(false);
 
   const dispatch = useDispatch();
+
+const searchCache= useSelector((store)=>store.search)
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      getSearchQuery();
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchQuery();
+      }
     }, 800);
     return () => {
       clearTimeout(timer);
@@ -23,6 +31,9 @@ function Head() {
     const data = await res.json();
     console.log("api response", data[1]);
     setSuggestions(data[1]);
+    dispatch(cacheSearch({
+      [searchQuery]:data[1]
+    }))
   };
 
   const handleClick = () => {
@@ -48,22 +59,23 @@ function Head() {
           className="border-2 border-gray-400 pl-4 col-span-10 w-1/2  rounded-l-full"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          onFocus={()=>setShowSuggestions(true)}
-          onBlur={()=>setShowSuggestions(false)}
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={() => setShowSuggestions(false)}
         ></input>
         <button className=" border-gray-400 border-2 ml-0   hover:bg-slate-300  rounded-r-full w-1/12 ">
           🔍
         </button>
         <div className="fixed py-2 px-5 absolute bg-slate-100 shadow-lg rounded-lg w-[24rem]">
           <ul>
-            {showSuggestion && suggestions?.map((s) => (
-              <li
-                key={s}
-                className="py-2 shadow-sm hover:bg-gray-200  rounded-lg "
-              >
-                🔍 {s}
-              </li>
-            ))}
+            {showSuggestion &&
+              suggestions?.map((s) => (
+                <li
+                  key={s}
+                  className="py-2 shadow-sm hover:bg-gray-200  rounded-lg "
+                >
+                  🔍 {s}
+                </li>
+              ))}
           </ul>
         </div>
       </div>
