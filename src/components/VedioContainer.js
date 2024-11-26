@@ -11,7 +11,7 @@ function VedioContainer() {
   }, []);
 
   return (
-    <div className="flex cursor-pointer flex-wrap  pt-4">
+    <div className="flex cursor-pointer flex-wrap  pt-4" >
       {vedio.map((vedios, index) => (
         <Link to={"/watch?v=" + vedios?.id}>
           {" "}

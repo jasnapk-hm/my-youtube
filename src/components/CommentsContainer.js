@@ -45,7 +45,11 @@ const commentData = [
   {
     name: "jasna",
     text: "lorem i andahbdhabsbacfdyqdadv",
-    replies: [],
+    replies: [  {
+      name: "jasna",
+      text: "lorem i andahbdhabsbacfdyqdadv",
+      replies: [],
+    },],
   },
 ];
 
@@ -71,7 +75,7 @@ function CommandList({ comments }) {
   return comments.map((comment, index) => (
     <div>
       <Comment key={index} data={comment} />
-      <div className="pl-5 border border-l-black">
+      <div className="pl-6 border border-l-black">
         <CommandList key={index} comments={comment.replies} />
       </div>
     </div>
