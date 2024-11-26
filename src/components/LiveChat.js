@@ -9,11 +9,11 @@ function LiveChat() {
   const dispatch = useDispatch();
   const [liveMessage, SetLiveMessage] = useState("");
   const chat = useSelector((store) => store.chatmessage.message);
-  console.log("chat...", chat);
+//   console.log("chat...", chat);
   useEffect(() => {
    //api polling
     const interval = setInterval(() => {
-      console.log("API claaing");
+    //   console.log("API claaing");
       dispatch(
         addMessage({
           name: generateName(),

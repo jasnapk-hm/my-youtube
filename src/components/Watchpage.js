@@ -9,7 +9,7 @@ function Watchpage() {
   const dispatch = useDispatch();
   const [searchparam] = useSearchParams();
   useEffect(() => {
-    console.log("parm id", searchparam.get("v"));
+    // console.log("parm id", searchparam.get("v"));
     dispatch(closeMenu());
   }, []);
 
